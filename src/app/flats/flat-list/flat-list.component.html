@@ -1,0 +1,11 @@
+<ul *ngIf="(list | async)?.length>0 && (fetchState | async) === 'fulfilled'" >
+    <li *ngFor="let flat of list | async">
+        <h3>{{flat.address}}</h3>
+        <div>{{flat.category.name}} {{flat.id}}</div>
+        <div>{{flat.price}}</div>
+        <div *ngIf="flat.square">{{flat.square}} m2</div>
+    </li>
+</ul>
+<p *ngIf="(list | async)?.length === 0 && (fetchState | async) === 'fulfilled'">Flats not found</p>
+<p *ngIf="(fetchState | async) === 'pending'">Loading...</p>
+<p>{{fetchState | async}}</p>

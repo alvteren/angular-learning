@@ -1,21 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ActiveUsersComponent } from './active-users/active-users.component';
-import { InactiveUsersComponent } from './inactive-users/inactive-users.component';
+import { FlatListComponent } from './flats/flat-list/flat-list.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ActiveUsersComponent,
-    InactiveUsersComponent
+    FlatListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
