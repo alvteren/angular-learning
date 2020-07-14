@@ -1,5 +1,5 @@
-<ul *ngIf="!isHidden">
-    <li *ngFor="let page of pages">
-        <a [routerLink]="[routerLink]" [queryParams]="{page:page}">{{page}}</a>
+<ul class="pagination" *ngIf="!isHidden">
+    <li class="page-item" [ngClass]="{active: page === currentPage}" *ngFor="let page of pages">
+        <a class="page-link" [routerLink]="[routerLink]" [queryParams]="{page:page}">{{page}}</a>
     </li>
 </ul>

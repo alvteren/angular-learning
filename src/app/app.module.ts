@@ -9,6 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { FlatsComponent } from './flats/flats.component';
 import { FlatDetailComponent } from './flats/flat-detail/flat-detail.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlatFiltersComponent } from './flats/flat-list/flat-filters/flat-filters.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { PaginationComponent } from './pagination/pagination.component';
     HomeComponent,
     FlatsComponent,
     FlatDetailComponent,
-    PaginationComponent
+    PaginationComponent,
+    FlatFiltersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

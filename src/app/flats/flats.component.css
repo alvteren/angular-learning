@@ -1,0 +1,10 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+}
+
+.filters-title {
+    font-size: 1.5em;
+    margin: 0.67em 0;
+}

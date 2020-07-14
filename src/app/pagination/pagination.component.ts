@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -6,13 +6,13 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css']
 })
-export class PaginationComponent implements OnInit, OnChanges {
+export class PaginationComponent {
   /** current page */
-  @Input() page: number;
+  @Input('page') currentPage: number;
   /** items on a page */
   @Input() size = 10;
   /** amount items */
-  @Input() count: number;['']
+  @Input() count: number;
 
   get isHidden() {
     return this.pages.length <= 1
@@ -27,13 +27,5 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   constructor(private activeRoute: ActivatedRoute) { }
-  
-  ngOnInit(): void {
-  }
-  
-  ngOnChanges(changes: SimpleChanges): void {
-    
-  }
-
  
 }

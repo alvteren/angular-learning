@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 
 import { FlatList, FlatResponse } from './flat.model';
@@ -14,10 +14,13 @@ export class FlatListService {
 
   constructor(private http: HttpClient) {}
 
-  fetchList = () => {
+  fetchList = ({page = 1, size = 10}) => {
     this.fetchState$.next('pending')
 
-    return this.http.get<FlatResponse.Palyload>('https://www.sdvor.com/api/common/flats/')
+    return this.http.get<FlatResponse.Palyload>('https://www.sdvor.com/api/common/flats/', 
+      {
+        params: new HttpParams({fromObject: {page: `${page}`, page_size: `${size}`}})
+      })
       .pipe<FlatResponse.Palyload, FlatList>(
         catchError((err)=> {
           this.fetchState$.next('rejected');
