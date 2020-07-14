@@ -1,12 +1,14 @@
-<p>{{fetchState}}</p>
+<h1>Flat List</h1>
 <div *ngIf="list$ | async as list">
     <div *ngIf="fetchState === 'fulfilled'">
         <ul *ngIf="list.length>0; emptyList" >
             <li *ngFor="let flat of list">
-                <h3>{{flat.address}}</h3>
-                <div>{{flat.category.name}} {{flat.id}}</div>
-                <div>{{flat.price}}</div>
-                <div *ngIf="flat.square">{{flat.square}} m2</div>
+                <a [routerLink]="['/flat',flat.id]">
+                    <h3>{{flat.address}}</h3>
+                    <span>{{flat.category.name}} {{flat.id}}</span>
+                    <span>{{flat.price}}</span>
+                    <span *ngIf="flat.square">{{flat.square}} m2</span>
+                </a>
             </li>
         </ul>
         <ng-template #emptyList>

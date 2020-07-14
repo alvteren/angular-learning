@@ -6,12 +6,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FlatListComponent } from './flats/flat-list/flat-list.component';
 import { HomeComponent } from './home/home.component';
+import { FlatsComponent } from './flats/flats.component';
+import { FlatDetailComponent } from './flats/flat-detail/flat-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlatListComponent,
-    HomeComponent
+    HomeComponent,
+    FlatsComponent,
+    FlatDetailComponent
   ],
   imports: [
     BrowserModule,
