@@ -13,6 +13,11 @@ export interface Flat {
     price: number;   
 }
 
+export interface FlatList {
+    items: Flat[];
+    count: number;
+}
+
 export namespace FlatResponse {
     interface Flat {
         id: number;

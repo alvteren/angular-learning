@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Flat } from './flat.model';
+import { FlatList } from './flat.model';
 import {FlatListService} from './flat-list.service';
 import { Observable, Subscription } from 'rxjs';
 import { PromiseState } from 'src/app/shared/promise-state.model';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,21 +13,30 @@ import { PromiseState } from 'src/app/shared/promise-state.model';
   styleUrls: ['./flat-list.component.css']
 })
 export class FlatListComponent implements OnInit, OnDestroy {
-  list$: Observable<Flat[]> | null = null;
+  list$: Observable<FlatList> | null = null;
   fetchState: PromiseState;
   fetchStateSubscription: Subscription;
+  page: number;
+  activeRouteSub: Subscription;
 
-  constructor(private flatListService: FlatListService) { }
+  constructor(private flatListService: FlatListService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.list$ = this.flatListService.fetchList();
     this.fetchStateSubscription = this.flatListService.fetchState$.subscribe((state) => {
-      console.log(state)
       this.fetchState = state
     });
+    // TODO: need typings for query params
+    this.page = +this.activeRoute.snapshot.queryParams['page'] || 1;
+    this.activeRoute.queryParams.subscribe(({page})=> {
+      if(page && +page > 0) {
+        this.page = +page;
+      }
+    })
   }
 
   ngOnDestroy() {
     this.fetchStateSubscription.unsubscribe();
+    this.activeRouteSub.unsubscribe();
   }
 }

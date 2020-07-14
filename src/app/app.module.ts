@@ -8,6 +8,7 @@ import { FlatListComponent } from './flats/flat-list/flat-list.component';
 import { HomeComponent } from './home/home.component';
 import { FlatsComponent } from './flats/flats.component';
 import { FlatDetailComponent } from './flats/flat-detail/flat-detail.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FlatDetailComponent } from './flats/flat-detail/flat-detail.component';
     FlatListComponent,
     HomeComponent,
     FlatsComponent,
-    FlatDetailComponent
+    FlatDetailComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

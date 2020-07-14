@@ -1,22 +1,25 @@
 <h1>Flat List</h1>
+<p *ngIf="fetchState === 'pending'">Loading...</p>
 <div *ngIf="list$ | async as list">
     <div *ngIf="fetchState === 'fulfilled'">
-        <ul *ngIf="list.length>0; emptyList" >
-            <li *ngFor="let flat of list">
-                <a [routerLink]="['/flat',flat.id]">
-                    <h3>{{flat.address}}</h3>
-                    <span>{{flat.category.name}} {{flat.id}}</span>
-                    <span>{{flat.price}}</span>
-                    <span *ngIf="flat.square">{{flat.square}} m2</span>
-                </a>
-            </li>
-        </ul>
+        <div *ngIf="list.items.length>0; emptyList" >
+            <app-pagination [count]="list.count" [page]="page"></app-pagination>
+            <ul>
+                <li *ngFor="let flat of list.items">
+                    <a [routerLink]="['/flat',flat.id]">
+                        <h3>{{flat.address}}</h3>
+                        <span>{{flat.category.name}} {{flat.id}}</span>
+                        <span>{{flat.price}}</span>
+                        <span *ngIf="flat.square">{{flat.square}} m2</span>
+                    </a>
+                </li>
+            </ul>
+            <app-pagination [count]="list.count" [page]="page"></app-pagination>
+        </div>
         <ng-template #emptyList>
             <p>Flats not found</p>
         </ng-template>
     </div>
     <p *ngIf="fetchState === 'rejected'" style="color: red;">Error</p>
 </div>
-<p *ngIf="fetchState === 'pending'">Loading...</p>
-
 

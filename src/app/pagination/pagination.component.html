@@ -1,0 +1,5 @@
+<ul *ngIf="!isHidden">
+    <li *ngFor="let page of pages">
+        <a [routerLink]="[routerLink]" [queryParams]="{page:page}">{{page}}</a>
+    </li>
+</ul>
