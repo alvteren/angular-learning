@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { Flat, FlatResponse } from './flat.model';
 import {PromiseState} from '../../shared/promise-state.model';
@@ -15,22 +15,17 @@ export class FlatListService {
   constructor(private http: HttpClient) {}
 
   fetchList = () => {
+    this.fetchState$.next('pending')
+
     return this.http.get<FlatResponse.Palyload>('https://www.sdvor.com/api/common/flats/')
-      .pipe<FlatResponse.Palyload, any, Flat[], Flat[]>(
-        tap((arg)=> {
-          console.log('pending', arg)
-          this.fetchState$.next('pending')
-        }),
+      .pipe<FlatResponse.Palyload, Flat[]>(
         catchError((err)=> {
           this.fetchState$.next('rejected');
           throw err;
         }),
-        map(({results})=> {
-          return results.map(({id, category, city,address, square, price})=> ({id, category, city,address, square, price}));
-        }),
-        tap((arg)=>{
-          console.log('fulfilled', arg)
+        map<FlatResponse.Palyload, Flat[]>(({results})=> {
           this.fetchState$.next('fulfilled')
+          return results.map(({id, category, city,address, square, price})=> ({id, category, city,address, square, price}));
         })
       )
   }
