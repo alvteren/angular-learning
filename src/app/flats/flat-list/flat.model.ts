@@ -18,6 +18,14 @@ export interface FlatList {
     count: number;
 }
 
+export namespace FlatRequest {
+    export interface Filters {
+        category_id__in: string[],
+        city_id: string,
+        num_rooms__in: string[],
+    }
+}
+
 export namespace FlatResponse {
     interface Flat {
         id: number;

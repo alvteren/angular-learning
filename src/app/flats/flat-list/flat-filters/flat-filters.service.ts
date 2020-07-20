@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import {FilterQueryParams, Filter} from './filter.model'
 import { toQueryParams } from '../../../shared/utils/toQueryParams/toQueryParams';
+import {FlatRequest} from '../flat.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,15 @@ export class FlatFiltersService {
     }
 
     return toQueryParams(queryParams,'double');
+  }
+
+  toApiParams = ():string =>{
+    const params:FlatRequest.Filters = {
+      city_id: this.filters.city,
+      category_id__in: this.filters.category,
+      num_rooms__in: this.filters.rooms,
+    }
+
+    return toQueryParams(params, 'commas');
   }
 }

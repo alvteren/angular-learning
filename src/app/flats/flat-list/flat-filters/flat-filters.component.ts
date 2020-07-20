@@ -16,5 +16,5 @@ export class FlatFiltersComponent implements OnInit {
     this.flatFiltersService.parseQueryParams(this.activeRoute.snapshot.queryParams);
   }
 
- 
+  
 }
